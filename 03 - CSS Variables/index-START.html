@@ -26,6 +26,13 @@
       misc styles, nothing to do with CSS variables
     */
 
+    :root {
+      --spacing: 10px;
+      --blur: 10px;
+      --base: black;
+     
+    }
+
     body {
       text-align: center;
       background: #193549;
@@ -42,9 +49,30 @@
     input {
       width: 100px;
     }
+
+    img {
+     padding: var(--spacing);
+     background: var(--base);
+     filter: blur(var(--blur));
+    }
+
+    .hl {
+      color: var(--base)
+    }
   </style>
 
   <script>
+   const inputs = document.querySelectorAll('.controls input')
+  function handleUpdate() {
+    const suffix = this.dataset.sizing || ''
+
+    document.documentElement.style.setProperty(`--${this.name}`, this.value + suffix)
+  }
+
+   inputs.forEach(input => input.addEventListener('change', handleUpdate))
+   inputs.forEach(input => input.addEventListener('mousemove', handleUpdate))
+
+
   </script>
 
 </body>
